@@ -1,0 +1,1120 @@
+/* 꿀팁: ctrl + / 하면 주석기호 자동생성 */
+
+*, 
+*::before, 
+*::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; /* 부모 요소(html이겠지?)의 box-sizing의 값을 상속받음.*/
+}
+
+html{
+  box-sizing: border-box; /* border를 기준으로 box model의 크기를 결정한다는 것.*/
+  font-size: 62.5%; /* rem(16px) * 62.5% = 10px입니당. 따라서 rem = 10px로 지정된거죵.*/
+}
+
+body{
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  background-color: #fff;
+  color: #243a6f;
+  position: relative;
+  z-index: 1;
+}
+
+h1,
+h2,
+h3,
+h4{
+  font-weight: 500;
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+img{
+  max-width: 100%;
+}
+
+li{
+  list-style-type: none;
+}
+
+.container{
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+.container-md{
+  max-width: 100rem;
+  margin: 0 auto;
+}
+
+/* 
+only는 미디어쿼리를 지원하지 않는 구형 브라우저가 미디어쿼리 스타일을 그대로 적용하지 못하게 막는 연산자.
+사용 시 반드시 screen과 같은 미디어 유형을 작성해줘야 함. not, only등의 연산자를 쓰지 않는다면 생략해도 됨.
+*/
+@media only screen and (max-width: 1200px){
+  .container{
+    padding: 0 3rem;
+  }
+
+  .container-md{
+    padding: 0 3rem;
+  }
+}
+
+.header{
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #d1e2e9;
+  overflow: hidden;
+}
+
+/* .fix-nav 라는 클래스명을 DOM으로 제어해서 붙였다 똈다 하려는 것 같음. */
+.nav.fix-nav{
+  position: fixed;
+  /* 스크롤 시 위치 고정. sticky랑 다름. 얘는 처음부터 스크롤 고정되어 있음.*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #243a6f;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.nav.fix-nav .nav-link,
+.nav.fix-nav .logo,
+.nav.fix-nav .cart-icon,
+.nav.fix-nav .hamburger{
+  color: #fff;
+}
+
+.nav{
+  padding: 1.6rem 0;
+}
+
+.navigation{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo h1{
+  font-size: 2.5rem;
+}
+
+.top-nav{
+  display: none;
+}
+
+.nav-list{
+  display: flex;
+  align-items: center;
+}
+
+.nav-item:not(:last-child){ /* selector:not(:last-child) 해당 셀렉터들 중 마지막 노드는 제외하고 나머지 노드들에만 적용한다는 뜻*/
+  margin-right: 0.5rem;
+}
+
+.nav-link:link,
+.nav-link:visited{
+  padding: 0.8rem 1rem;
+  transition: all 300ms ease-in-out;
+}
+
+.nav-link.icon{ /* .class1.class2 는 2개의 클래스명을 둘 다 가지고 있는 요소를 선택한다는 뜻. */
+  font-size: 3rem; /* <i> 아이콘 태그는 font-size의 속성값을 적용받는다.*/
+}
+
+.hamburger{
+  display: none;
+}
+
+.cart-icon{
+  display: none;
+}
+
+@media only screen and (max-width: 768px){
+  .menu{
+    position: fixed; /* position의 기본값. 일반적인 문서 흐름에 따라 배치 */
+    top: 0;
+    left: -100%; /* 즉, show라는 class가 붙어있지 않다면, nav(부모태그)의 100%만큼 왼쪽 바깥으로 나가있는 상태. 즉 아예 안보이겠지.*/
+    width: 80%;
+    max-width: 40rem;
+    height: 100%;
+    background-color: #fff;
+    transition: all 500ms ease-in-out; /* all 은 transition-property. 즉 트랜지션이 적용될 속성(width, height, all 등...) */
+    z-index: 100;
+  }
+
+  .menu.show{
+    left: 0;
+  }
+
+  .top-nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #243a6f;
+    padding: 1rem 1.6rem;
+  }
+
+  .top-nav .logo{
+    color: #fff;
+  }
+
+  .top-nav .close{
+    color: #fff;
+    font-size: 3rem;
+    padding: 1rem;
+    cursor: pointer;
+  }
+
+  .cart-icon{
+    display: block;
+    font-size: 3rem;
+  }
+
+  .hamburger{
+    display: block;
+    font-size: 3rem;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+
+  .nav-link:link,
+  .nav-link:visited{
+    display: block;
+    font-size: 1.7rem;
+    padding: 1rem 0;
+  }
+
+  .nav-list{
+    flex-direction: column;
+    align-items: start;
+    padding: 1rem 1.6rem;
+  }
+
+  .nav.fix-nav .nav-link{
+    color: #243a6f;
+  }
+
+  .nav-link.icon{
+    display: none;
+  }
+
+  /*
+  ::before는 선택한 요소의 첫 자식으로 의사 요소(가상의 element)를 하나 생성합니다. 
+  보통 content 속성과 함께 짝지어, 요소에 장식용 콘텐츠를 추가할 때 사용합니다. 
+  기본값은 인라인입니다.
+  ::before는 요소의 첫번째 자식노드에 추가, ::after는 요소의 마지막 자식노드에 추가.
+  */
+  body.show::before{ /* element.class 는 해당 element 중에서 해당 class명을 가진 애들을 모두 선택함. */
+    /* 
+    ::before, ::after와 함께 쓰이는 content는 '가짜' 속성.
+    HTML 문서에 정보로 포함되지 않은 요소를 CSS에서 새롭게 생성시켜 줌.
+    */
+    content: ""; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 4;
+  }
+  
+  .nav.show{
+    background-color: rgba(0, 0, 0, 0.8);;
+  }
+}
+
+/* Hero */
+
+.header .hero-img{
+  position: absolute;
+  bottom: -10%; /* bottom에서 시작해서 header(부모태그)의 높이의 -10% 만큼 이동 */
+  right: -5%; /* right에서 시작해서 부모태그의 width의 -5% 만큼*/
+  height: 70rem;
+  object-fit: contain; 
+  /* object-fit 속성은 <img>나 <video> 요소와 같은 대체 요소의 콘텐츠 크기를 어떤 방식으로 조절해 요소에 맞출 것인지 지정 */
+  /* contain 대체 콘텐츠의 가로세로비를 유지하면서, 요소의 콘텐츠 박스 내부에 들어가도록 크기를 맞춤 조절 */
+}
+
+.hero-content{
+  position: absolute;
+  top: 50%;
+  transform: translate(25%, -50%); /* transform: translate(x, y) 은 x, y방향으로 element를 reposition함. */
+}
+
+.hero-content h2{
+  color: #b888ff;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-content .discount{
+  color: #fbb419;
+}
+
+.hero-content h1 span{
+  color: #253b70;
+  font-size: 6rem;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+  text-shadow: 3px 3px 0 #f1f1f1, 4px 4px 0 #f1f1f1; /* offset-x | offset-y | blur-radius | color */
+}
+
+.btn{
+  display: inline-block;
+  background-color: #fc7c7c;
+  padding: 1.2rem 4rem;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: 3rem;
+}
+
+@media only screen and (max-width: 1200px){
+  .header .hero-img{
+    right: -20%;
+  }
+
+  .hero-content{
+    transform: translate(20%, -50%);
+  }
+
+  .hero-content h2{
+    font-size: 2rem;
+  }
+
+  .hero-content h1 span{
+    font-size: 5rem;
+  }
+}
+
+@media only screen and (max-width: 996px){
+  .header{
+    min-height: 70vh;
+  }
+
+  .header .hero-img{
+    height: 40rem;
+    right: -10%;
+  }
+}
+
+@media only screen and (max-width: 567px){
+  .header{
+    min-height: 100vh;
+  }
+
+  .header .hero-img{
+    bottom: -15%;
+    right: 0;
+  }
+
+  .hero-content{
+    transform: translate(15%, -50%);
+  }
+
+  .hero-content h2{
+    font-size: 1.8rem;
+  }
+
+  .hero-content h1 span{
+    font-size: 4rem;
+  }
+
+  .hero-content a{
+    padding: 1rem 3rem;
+  }
+}
+
+/* Advert */
+
+.section{
+  padding: 10rem 0 5rem 0;
+}
+
+.advert-center{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  /*
+  auto-fit, auto-fill
+  행/열(Track)의 '개수'를 그리드 컨테이너(Container) 및 행/열 크기에 맞게 자동으로(암시적) 조정합니다.
+  repeat() 함수와 같이 사용하며, 행/열과 아이템(Item) 개수가 명확할 필요가 없거나 
+  명확하지 않은 경우 유용합니다.(반응형 그리드)
+  auto-fill은 남는 공간(빈 트랙)을 그대로 유지하고, auto-fit은 남는 공간을 축소합니다.
+
+  minmax(min값, max값)
+  행/열(Track)의 ‘최소/최대 크기’를 정의합니다.
+  첫 번째 인수는 ‘최솟값’이고 두 번째 인수는 ‘최댓값’입니다.
+  일반 요소에 min-width와 max-width 속성을 동시 지정하는 것과 유사
+  */
+
+  gap: 3rem;
+}
+
+.advert-box{
+  position: relative;
+  color: #fff;
+  height: 27rem;
+  border-radius: 1.6rem;
+  padding: 1.6rem;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.advert-box img{
+  position: absolute;
+  bottom: 0;
+  left: -20%;
+  height: 100%;
+  width: 35rem;
+  z-index: -1;
+}
+
+.advert-box:nth-child(1){
+  background-color: #f5c5d1;
+}
+
+.advert-box:nth-child(2){
+  background-color: #a1d1df;
+}
+
+.advert-box:nth-child(3){
+  background-color: #e5bc00;
+}
+
+.advert-box .dotted{
+  position: relative;
+  height: 100%;
+  border: 2px dashed #f1f1f1;
+  border-radius: 1rem;
+}
+
+.advert-box .content{
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translate(0, -50%);
+}
+
+.advert-box .content h2,
+.advert-box .content h4{
+  text-shadow: 5px 6px 0px rgba(37, 59, 112, 0.1);
+}
+
+.advert-box .content h2{
+  line-height: 1.2;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.advert-box .content h4{
+  font-size: 1.5rem;
+  text-transform:  capitalize; /* capitalize : 단어의 첫번째 글자를 대문자로 바꿉니다. */
+}
+
+/* Featured */
+
+.title{
+  margin: 4rem 0 7rem 0;
+  text-align: center;
+}
+
+.title h1{
+  font-size: 3rem;
+  display: inline-block;
+  position: relative;
+  z-index: 0;
+}
+
+.title h1::after{
+  content: ""; /* 가상 요소로 딱히 추가할 콘텐트가 없지만 장식적으로 rectangle을 사용하고 싶을 때 쓰는 듯. */
+  position: absolute;
+  left: 50%;
+  bottom: -20%;
+  transform: translate(-50%, -50%); /* 이거는 위치 대략 잡고나서 좀 더 가운데로 맞출 때 자주 쓰는거 같음. */
+  background-color: #f60091;
+  width: 50%;
+  height: 0.4rem;
+  z-index: 1;
+}
+
+/* Product */
+.product-center{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 7rem 3rem; 
+  /* 
+  gap은 <'row-gap'> 값을 사용해 지정하며, 선택적으로 <'column-gap'>을 추가할 수 있습니다. 
+  <'column-gap'>을 생략한 경우 <'row-gap'>과 동일한 값을 사용합니다.
+  따라서, gap: a, b에서 a = row-gap, b = column-gap 을 의미함.
+  */
+}
+
+.product{
+  height: 48rem;
+  background-color: #fff;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+  border-radius: 1rem;
+  text-align: center;
+  transition: all 300ms ease-in-out;
+  /*
+  transition
+  CSS 트랜지션은 CSS 속성을 변경할 때 애니메이션 속도를 조절하는 방법을 제공합니다. 
+  속성 변경이 즉시 영향을 미치게 하는 대신, 그 속성의 변화가 일정 기간에 걸쳐 일어나도록 할 수 있습니다.
+  
+  한마디로, 밑에 보이는 .product:hover처럼 해당 요소의 css속성이 변화하는 경우
+  transition에서 지정한 대로 애니메이션화하여 변화의 속도를 조정함. 
+  */
+}
+
+.product:hover{
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.25);
+}
+
+.product-header{
+  position: relative;
+  background-color: #f6f2f1; 
+  height: 35rem;
+  transition: all 300ms ease-in-out;
+  z-index: 0;
+}
+
+.product-header img{
+  height: 100%;
+}
+
+.product-footer{
+  padding: 2rem 1.6rem 1.6rem 1.6rem;
+}
+
+.product-footer h3{
+  font-size: 2.2rem;
+}
+
+.rating{
+  color: #43b3d9;
+}
+
+.product-footer .price{
+  color: #ff7c9c;
+  font-size: 2rem;
+}
+
+/* 
+.product:hover된 상태일 때 그 자식노드인 .product-header의 맨 마지막 자식노드로 가상요소를 넣어라는 뜻 
+이런 식으로 부모 노드를 hover했을 때 자식 노드들의 스타일에 변화를 주거나 transition으로 애니메이션을 적용할 수 있음.
+*/
+.product:hover .product-header::after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 1rem 1rem 0 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  transition: all 500ms ease-in-out;
+}
+
+.product-header .icons{
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translate(0, -50%) scale(0);
+  /* 
+  transform:scale() - X 또는 Y축으로 확대/ 축소
+  scale은 해당 요소를 지정한 크기만큼 확대 또는 축소 시킬 수 있습니다.
+  사용방법은 아래와 같습니다.
+
+  transform:scaleX(x축 비율);          // x축으로 확대, 축소
+  transform:scaleY(y축 비율);          // y축으로 확대, 축소
+  transform:scale(x축 비율, y축 비율);  // x축, y축으로 확대, 축소
+  */
+  z-index: 2;
+  opacity: 0;
+  transition: all 500ms ease-in-out;
+}
+
+.product-header .icons span{
+  background-color: #fff;
+  font-size: 2.5rem;
+  display: block;
+  border-radius: 50%; /* 원을 만들겠다는 뜻이지 */
+  padding: 1.5rem 1.6rem;
+  line-height: 2rem;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.product-header .icons span i {
+  transition: all 500ms ease-in-out;
+}
+
+/* span들 중에서 마지막 노드만 제외하고 해당 속성을 적용한다는 뜻  */
+.product-header .icons span:not(:last-child){ 
+  margin-bottom: 1rem;
+}
+
+.product-header .icons span:hover{
+  background: #ff7c9c;
+  color: #fff;
+}
+
+.product:hover .icons{
+  opacity: 1;
+  transform: translate(0, -50%) scale(1);
+}
+
+.product:hover .icons a{
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Product Banner */
+
+.product-banner{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 50rem;
+  background-color: #243a6f;
+}
+
+.product-banner .left{
+  height: inherit;
+}
+
+.product-banner .left img{
+  /* 
+  object-fit 속성은 <img>나 <video> 요소와 같은 대체 요소의 
+  콘텐츠 크기를 어떤 방식으로 조절해 요소에 맞출 것인지 지정합니다.
+
+  cover
+  대체 콘텐츠의 가로세로비를 유지하면서, 
+  요소 콘텐츠 박스를 가득 채웁니다. 
+  서로의 가로세로비가 일치하지 않으면 객체 일부가 잘려나갑니다.
+  */
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.product-banner .right{
+  /* 
+  align-self CSS property overrides a grid or flex item's align-items value. 
+  In Grid, it aligns the item inside the grid area. 그리드 영역 내에서 item을 align함.
+  In Flexbox, it aligns the item on the cross axis.
+  */
+  align-self: center;
+  text-align: center;
+  padding: 1.6rem;
+}
+
+.product-banner .content h2{
+  color: #fbb419;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.product-banner .content .discount{
+  color: #b888ff;
+}
+
+.product-banner .content h1 span{
+  color: #fff;
+  font-size: 6rem;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+}
+
+@media only screen and (max-width: 996px){
+  .product-banner .content h1 span{
+    font-size: 5rem;
+  }
+}
+
+@media only screen and (max-width: 768px){
+  .product-banner{
+    grid-template-columns: 1fr;
+    /* 1fr로 하면 '1fr 1fr'로 했을때와 다르게 1column으로 쭉 내려옴. */
+  }
+
+  .product-banner .left{
+    display: none;
+  }
+
+  .product-banner .content h1 span{
+    font-size: 4rem;
+  }
+
+  .product-banner .content h2{
+    font-size: 2rem;
+  }
+
+  .product-banner .content a{
+    padding: 1rem 3rem;
+  }
+}
+
+/* Testimonial */
+
+.testimonial-center{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 6rem;
+}
+
+.testimonial{
+  position: relative;
+  padding: 5rem;
+  background-color: #fff;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+  transition: all 300ms ease-in-out;
+  text-align: center;
+  border-radius: 0.5rem;
+}
+
+.testimonial:hover{
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.4);
+  transform: translateY(-1rem);
+  /* translateY(양수)는 아래로 이동하고, 마이너스값은 반대로 위로 이동함 */
+}
+
+.testimonial span{
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  font-size: 12rem;
+  transform: translate(-50%, 0);
+  line-height: 1;
+  font-family: sans-serif;
+}
+
+.testimonial p{
+  margin: 2rem 0 1rem 0;
+}
+
+.testimonial .rating{
+  margin-bottom: 1rem;
+}
+
+.testimonial .img-cover{
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
+  /* .img-cover를 원으로 만들겠다는 뜻 */
+  overflow: hidden;
+  /* .img-cover의 콘텐트, 즉 자식 요소인 img가 넘쳐흐르는 부분은 숨긴다는 뜻. */
+  margin: 0 auto;
+  /* 위,아래는 0, 좌,우는 자동으로 마진값을 맞춰서 원이 가운데에 위치할 수 있도록 하겠다는 뜻. */
+}
+
+.testimonial .img-cover img{
+  height: 100%;
+  object-fit: cover;
+  /* object-fit은 대체 요소 즉, '외부 소스로 가져온 요소'의 콘텐츠 크기를 어떻게 조절해서 맞출것인지 결정함. */
+}
+
+.testimonial h4{
+  margin-top: 1rem;
+}
+
+/* Brands */
+
+.brands-center{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 3rem; 
+  /* gap만 쓰면 column-gap을 의미함. */
+}
+
+.brand{
+  height: 8rem;
+  width: 8rem;
+  margin: 0 auto;
+}
+
+.brand img{
+  object-fit: contain;
+}
+
+@media only screen and (max-width: 768px){
+  .brands-center{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Footer */
+
+.footer{
+  background-color: #222;
+  padding: 6rem 1rem;
+  line-height: 3rem;
+}
+
+.footer-center{
+  margin-right: 1rem;
+}
+
+.footer-container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  color: #fff;
+}
+
+.footer-center a:link,
+.footer-center a:visited{
+  display: block;
+  color: #f1f1f1;
+  font-size: 1.4rem;
+  transition: 0.6s;
+  /* 밑에서 hover로 변할 때 적용하려는 transition이겠지? */
+}
+
+.footer-center a:hover{
+  color: #f60091;
+}
+
+.footer-center div{
+  color: #f1f1f1;
+  font-size: 1.4rem;
+}
+
+.footer-center h3{
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 996px){
+  .footer-container{
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 2rem;
+  }
+}
+
+@media only screen and (max-width: 768px){
+  .footer-container{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* All Products */
+.section .top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
+
+.all-products .top select{
+  font-family: 'Poppins', sans-serif;
+  width: 20rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  appearance: none;
+  outline: none;
+}
+
+form{
+  position: relative;
+  z-index: 1;
+}
+
+/* 
+position
+
+static은 html문서 흐름 상 원래 있어야 할 자리. 기본값.
+relative가 static인 상태를 기준으로 주어진 픽셀만큼 움직였다면, 
+absolute는 position: static 속성을 가지고 있지 않은 부모를 기준으로 움직입니다. 
+만약 부모 중에 포지션이 relative, absolute, fixed인 태그가 없다면 가장 위의 태그(body)가 기준이 됩니다. 
+fixed는 window창, 페이지를 기준으로 움직입니다.
+sticky는 원래 있던 자리에 있지만 스크롤 시 없어지지 않고 붙어있게 됩니다.
+*/
+form span{
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  z-index: 0;
+}
+
+/* Pagination */
+.pagination{
+  padding: 3rem 0 5rem 0;
+}
+
+.pagination span{
+  display: inline-block;
+  padding: 1rem 1.5rem;
+  border: 1px solid #243a6f;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.pagination span:hover{
+  border: 1px solid #243a6f;
+  background-color: #243a6f;
+  color: #fff;
+}
+
+/* Product Details */
+.product-detail .details{
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 7rem;
+}
+
+.product-detail .details .left{
+  display: flex;
+  flex-direction: column;
+}
+
+.product-detail .details .left .main{
+  text-align: center; /* 참고로 <img>도 text-align의 지정을 받음.*/
+  background-color: #f6f2f1; /* 이거는 img배경색과 같게 해서 .main으로 썸네일 크기 작업하려던 거지*/
+  margin-bottom: 2rem;
+  height: 45rem;
+  padding: 3rem;
+}
+
+.product-detail .details .left .main img{
+  object-fit: contain;
+  height: 100%;
+}
+
+.product-detail .details .thumbnails{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.product-detail .thumbnail{
+  width: 10rem;
+  height: 10rem;
+  background-color: #f6f2f1;
+  text-align: center;
+}
+
+.product-detail .thumbnail img{
+  height: 100%; /* height는 부모요소인 .thumnail의 height즉, 10rem의 100%니까 10rem이 되겠지? -> 정사각형이 되게 함*/
+  object-fit: contain;
+}
+
+.product-detail .right span{
+  display: inline-block;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.product-detail .right h1{
+  font-size: 4rem;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.product-detail .right .price{
+  font-weight: 600;
+  font-size: 2rem;
+  color: #ff7c9c;
+  margin-bottom: 2rem;
+}
+
+.product-detail .right div{
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.product-detail .right select{
+  font-family: 'Poppins', sans-serif;
+  width: 20rem;
+  padding: .7rem;
+  border: 1px solid #ccc;
+  appearance: none;
+  outline: none; /* outline은 <select>를 클릭했을 때 활성화되는 border line을 어떻게 처리할지 결정하는 거임.*/
+}
+
+.product-detail form{
+  margin-bottom: 2rem;
+}
+
+.product-detail form span{
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  z-index: 0;
+}
+
+.product-detail .form{
+  margin-bottom: 3rem;
+}
+
+.product-detail .form input{
+  padding: 0.8rem;
+  text-align: center;
+  width: 3.5rem;
+  margin-right: 2rem;
+}
+
+.product-detail .form .addCart{
+  background-color: #ff7c9c;
+  padding: 0.8rem 4rem;
+  color: #fff;
+  border-radius: 3rem;
+}
+
+.product-detail h3{
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+@media only screen and (max-width: 996px){
+  .product-detail .left{
+    width: 30rem;
+    height: 45rem;
+  }
+
+  .product-detail .details{
+    gap: 3rem;
+  }
+
+  .product-detail .thumbnails{
+    width: 30rem;
+    gap: 0.5rem;
+  }
+
+  .product-detail .thumbnail{
+    width: auto;
+    height: 10rem;
+    background-color: #f6f2f1;
+    text-align: center;
+    padding: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 650px){
+  .product-detail .details{
+    grid-template-columns: 1fr;
+    row-gap: 3rem;
+  }
+
+  .product-detail .right{
+    margin-top: 20rem;
+  }
+
+  .product-detail .left{
+    width: 100%;
+    height: 45rem;
+  }
+
+  .product-detail .thumbnails{
+    width: 100%;
+  }
+}
+
+/* Cart Items */
+.cart{
+  margin: 10rem auto;
+}
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+  /* 
+  border-collapse CSS 속성은 표 테두리(border)가 분리(separated) 또는 상쇄(collapsed)될 지를 결정합니다. 
+  분리 모델에서는, 인접한 셀은 각각 자신의 고유(distinct) 테두리가 있습니다. 
+  쇄 모델에서는, 인접한 표 셀은 테두리를 공유합니다. 
+  MDN에서 검색해서 그림 보면 바로 알 수 있음.
+  */
+}
+
+.cart-info{
+  display: flex;
+  flex-wrap: wrap;
+  /* 
+  flex-wrap property는 flex-item 요소들이 강제로 한줄에 배치되게 할 것인지, 
+  또는 가능한 영역 내에서 벗어나지 않고 여러행으로 나누어 표현 할 것인지 결정하는 속성
+
+  wrap
+  flex-item 요소들이 내부 로직에 의해 분할되어 여러 행에 걸쳐서 배치됨.
+  MDN 그림 보면 바로 알 수 있음.
+  */
+}
+
+th{
+  text-align: left;
+  padding: 0.5rem;
+  background-color: #fc7c7c;
+  color: #fff;
+  font-weight: normal;
+}
+
+td{
+  padding: 1rem 0.5rem;
+}
+
+td input{
+  width: 5rem;
+  height: 3rem;
+  padding: 0.5rem;
+}
+
+td a{
+  color: orangered;
+  font-size: 1.4rem;
+}
+
+td img{
+  width: 8rem;
+  height: 8rem;
+  margin-right: 1rem;
+}
+
+.total-price{
+  display: flex;
+  justify-content: flex-end; /* main-axis의 끝지점에 배치 */
+  flex-direction: column;
+  align-items: flex-end; /* cross-axis의 끝지점에 배치 */
+  margin-top: 2rem;
+}
+
+.total-price table{
+  border-top: 3px solid #fc7cfc;
+  width: 100%;
+  max-width: 35rem;
+}
+
+/* 각각의 <tr>안에 담긴 모든 td들 중에서 마지막 노드들에만 해당 css 적용  */
+td:last-child{
+  text-align: right;
+}
+
+th:last-child{
+  text-align: right;
+}
+
+@media only screen and (max-width: 567px){
+  .cart-info p{
+    display: none;
+  }
+}
